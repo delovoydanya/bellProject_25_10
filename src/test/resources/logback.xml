@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Формат логов в консоли -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Уровень логирования для твоих классов -->
+    <logger name="tests" level="DEBUG"/>
+    <logger name="pages" level="DEBUG"/>
+    <logger name="ru.ya" level="DEBUG"/>
+
+    <!-- Уровень логирования для сторонних библиотек -->
+    <logger name="io.github.bonigarcia" level="INFO"/>
+    <logger name="org.openqa.selenium" level="WARN"/>
+
+    <!-- Корневой уровень -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

@@ -1,0 +1,43 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class YaCurrencyAfterSearchPage {
+    private String selectorExchangeRates = "//table[@class='data']";
+    private String selectorTableHeaders = ".//th";
+    private String selectorTableRows = ".//tbody/tr/td/..";
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    private WebDriver driver;
+    private WebElement exchangeRates;
+    private List<Map<String, String>> collectExchangeRates = new ArrayList<>();
+
+    public YaCurrencyAfterSearchPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public List<Map<String, String>> getCollectExchangeRates() {
+    exchangeRates=driver.findElement(By.xpath(selectorExchangeRates));
+    List<WebElement> tableHeaders = exchangeRates.findElements(By.xpath(selectorTableHeaders));
+    List<WebElement> tableRows = exchangeRates.findElements(By.xpath(selectorTableRows));
+    for (int i=0; i<tableRows.size();++i){
+        Map<String, String> collectRow = new HashMap<>();
+        for (int j=0; j<tableHeaders.size();++j)
+            collectRow.put(
+                    tableHeaders.get(j).getText(),
+                    tableRows.get(i).findElement(By.xpath("./td["+(j+1)+"]")).getText()
+            );
+        collectExchangeRates.add(collectRow);
+    }
+    return collectExchangeRates;
+    }
+}
