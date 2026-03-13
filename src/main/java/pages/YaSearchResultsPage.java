@@ -149,7 +149,7 @@ public class YaSearchResultsPage {
         // Правильный локатор для заголовков результатов Яндекса
         // Структура: <div class="OrganicTitle"> → <a> → <h2 class="OrganicTitle-LinkText">
         By RESULT_TITLES = By.xpath(
-                "//div[contains(@class, 'OrganicTitle')]//h2[contains(@class, 'OrganicTitle-LinkText')]"
+                "//div[contains(@class, 'OrganicTitle')]//h2[contains(@class, 'OrganicTitle-LinkText')]//span[contains(@class, 'OrganicTitleContentSpan organic__title')]"
         );
 
         WebElement titleElement = driver.findElements(RESULT_TITLES).stream()

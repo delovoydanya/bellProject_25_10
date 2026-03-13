@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import pages.*;
 import ru.ya.BaseTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
@@ -179,10 +181,14 @@ public class Tests extends BaseTest {
         searchResults.waitForSearchResults();
 
         // 3. Ищем по заголовку Википедия:таблицы
-        WebElement wiki = searchResults.findResultByTitle("Википедия:Таблицы — Википедия");
+        WebElement wiki = searchResults.findResultByTitle("Таблица — Википедия");
 
         // 4. Кликаем по заголовку Википедия:таблицы
-        wiki.click();
+        Wikipedia wikipedia= searchResults.clickWikiHeader(wiki);
+        // 5. Поиск таблицы преподавателей
 
+
+        // 6. Проверка “Сергей Владимирович” первый в списке, а “Сергей Адамович” последний
+        logger.info("Результат сравнения: " + wikipedia.isFirstAndLast("Сергей Владимирович", "Сергей Адамович", wikipedia));
     }
 }
